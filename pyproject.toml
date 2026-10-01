@@ -1,0 +1,10 @@
+[project]
+name = "shadow-hadamard"
+version = "0.1.0"
+description = "Shadow-enhanced Hadamard test and symmetry-resolved spectroscopy in Qiskit Aer"
+requires-python = ">=3.10"
+dependencies = ["qiskit>=1.2", "qiskit-aer>=0.15", "numpy", "scipy", "matplotlib"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
