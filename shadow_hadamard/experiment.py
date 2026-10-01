@@ -115,13 +115,18 @@ def _rotate_to(qc: QuantumCircuit, basis: str, q):
         qc.h(q)
 
 
-def hadamard_circuit(problem: Problem, t: float, anc_basis: str, setting, measure=True):
+def hadamard_circuit(problem: Problem, t: float, anc_basis: str, setting, measure=True, evolution=None):
+    """evolution=None: exact 16x16 controlled unitary; a `trotter.Trotter`: gate-level circuit."""
     n = problem.n
     sysq, anc = QuantumRegister(n, "sys"), QuantumRegister(1, "anc")
     qc = QuantumCircuit(sysq, anc)
     qc.compose(problem.prep, qubits=list(sysq), inplace=True)
     qc.h(anc[0])
-    qc.append(controlled_evolution(problem, t), list(sysq) + [anc[0]])
+    if evolution is None:
+        qc.append(controlled_evolution(problem, t), list(sysq) + [anc[0]])
+    else:
+        from .trotter import controlled_trotter
+        qc.compose(controlled_trotter(problem.H, t, evolution), qubits=list(sysq) + [anc[0]], inplace=True)
     _rotate_to(qc, anc_basis, anc[0])
     for i, b in enumerate(setting):
         _rotate_to(qc, b, sysq[i])
@@ -142,11 +147,17 @@ class TimeData:
 
 
 def run_experiment(problem: Problem, times, shots_per_basis: int, scheme: PauliShadowScheme = UNIFORM,
-                   seed: int | None = None, mode: str = "aer") -> list[TimeData]:
+                   seed: int | None = None, mode: str = "aer", evolution=None,
+                   noise_model=None) -> list[TimeData]:
     """Take shadow-Hadamard data at each time. `shots_per_basis` shots go to each ancilla basis (X, Y).
 
     mode="aer"   : Qiskit Aer sampling, basis settings drawn at random for every shot.
-    mode="exact" : exact outcome probabilities (infinite shots) - used to verify the estimators."""
+    mode="exact" : exact outcome probabilities (infinite shots) - used to verify the estimators.
+    evolution    : None (exact controlled unitary) or a trotter.Trotter (gate-level circuit).
+    noise_model  : an Aer NoiseModel (needs a gate-level `evolution`; the exact 16x16 gate has
+                   nothing to attach gate errors to). Simulated with the density-matrix method."""
+    if noise_model is not None and evolution is None:
+        raise ValueError("a noise model needs a gate-level (Trotter) evolution")
     rng = np.random.default_rng(seed)
     n = problem.n
     settings = scheme.settings(n)
@@ -156,21 +167,22 @@ def run_experiment(problem: Problem, times, shots_per_basis: int, scheme: PauliS
         for a in "XY":
             if mode == "exact":
                 for s, prob in settings:
-                    qc = hadamard_circuit(problem, td.t, a, s, measure=False)
+                    qc = hadamard_circuit(problem, td.t, a, s, measure=False, evolution=evolution)
                     pr = Statevector.from_instruction(qc).probabilities()  # index = anc*2^n + sys
                     td.counts[(a, s)] = prob * pr.reshape(2, 2**n)
                 continue
             alloc = rng.multinomial(shots_per_basis, [p for _, p in settings])
             for (s, _), k in zip(settings, alloc):
                 if k:
-                    pubs.append((hadamard_circuit(problem, td.t, a, s), None, int(k)))
+                    pubs.append((hadamard_circuit(problem, td.t, a, s, evolution=evolution), None, int(k)))
                     keys.append((td, a, s))
     if pubs:
         # One Aer run per circuit, each with its own seed. Batching the pubs of one Aer SamplerV2
         # call with a fixed seed reuses the same random stream for every circuit, which correlates
         # the ancilla outcomes across basis settings and inflates the variance ~sqrt(#settings)-fold.
         from qiskit_aer import AerSimulator
-        sim = AerSimulator()
+        sim = (AerSimulator() if noise_model is None
+               else AerSimulator(method="density_matrix", noise_model=noise_model))
         for (qc, _, shots), (td, a, s) in zip(pubs, keys):
             counts = sim.run(qc, shots=shots, seed_simulator=int(rng.integers(2**31))).result().get_counts()
             arr = np.zeros((2, 2**n))

@@ -44,35 +44,56 @@ def matrix_pencil(y: np.ndarray, order: int) -> np.ndarray:
     return np.linalg.eigvals(np.linalg.pinv(W[:-1]) @ W[1:])
 
 
-def _design(E, t):
-    return np.exp(-1j * np.outer(t, E))
+def _design(E, t, gamma: float = 0.0):
+    return np.exp(-1j * np.outer(t, E)) * np.exp(-gamma * np.abs(t))[:, None]
 
 
-def _nnls_weights(E, t, y):
-    A = _design(E, t)
+def _nnls_weights(E, t, y, gamma: float = 0.0):
+    A = _design(E, t, gamma)
     w, _ = nnls(np.vstack([A.real, A.imag]), np.concatenate([y.real, y.imag]))
     return w
 
 
-def fit_signal(t, y, max_order: int, dt: float, refine: bool = True, n_sigma: float = 3.0):
-    """Return significant peaks (energy, weight, weight_err) of a uniformly sampled signal."""
-    te, ye = hermitian_extension(np.asarray(t), np.asarray(y))
+def fit_signal(t, y, max_order: int, dt: float, refine: bool = True, n_sigma: float = 3.0,
+               damped: bool = False):
+    """Return significant peaks (energy, weight, weight_err) of a uniformly sampled signal.
+
+    damped=False : unitary model, poles on the unit circle (noiseless data).
+    damped=True  : y(t) = sum_j w_j e^{-i E_j t} e^{-gamma |t|} with one shared gamma >= 0.
+                   Gate noise shrinks the signal roughly geometrically in circuit depth, i.e.
+                   exponentially in t for a fixed Trotter step. Fitting gamma and reporting the
+                   weights at t = 0 undoes that shrinkage (noise mitigation by extrapolation in
+                   time). Energies are unaffected by a pure decay, so they need no correction.
+    """
+    t = np.asarray(t)
+    te, ye = hermitian_extension(t, np.asarray(y))
     order = min(max_order, len(ye) // 3)
-    z = matrix_pencil(ye, order)
+    gamma = 0.0
+    if damped:
+        # Poles from the one-sided record: the |t| kink makes the extended record non-exponential.
+        z = matrix_pencil(np.asarray(y), min(max_order, len(y) // 3))
+        gamma = float(np.median(np.clip(-np.log(np.abs(z)) / dt, 0, None)))
+    else:
+        z = matrix_pencil(ye, order)
     E = -np.angle(z) / dt                     # unitary evolution: poles lie on the unit circle
-    w = _nnls_weights(E, te, ye)
+    w = _nnls_weights(E, te, ye, gamma)
     keep = w > 0
     E, w = E[keep], w[keep]
     if refine and len(E):
+        k = len(E)
+
         def resid(p):
-            r = ye - _design(p[:len(E)], te) @ p[len(E):]
+            g = p[2 * k] if damped else 0.0
+            r = ye - _design(p[:k], te, g) @ p[k:2 * k]
             return np.concatenate([r.real, r.imag])
-        lo = np.concatenate([E - np.pi / dt, np.zeros_like(w)])
-        hi = np.concatenate([E + np.pi / dt, np.full_like(w, 1.0)])
-        sol = least_squares(resid, np.concatenate([E, w]), bounds=(lo, hi))
-        E, w = sol.x[:len(E)], sol.x[len(E):]
+        p0 = np.concatenate([E, w] + ([[gamma]] if damped else []))
+        lo = np.concatenate([E - np.pi / dt, np.zeros_like(w)] + ([[0.0]] if damped else []))
+        hi = np.concatenate([E + np.pi / dt, np.full_like(w, 1.0)] + ([[np.inf]] if damped else []))
+        sol = least_squares(resid, np.clip(p0, lo, np.where(np.isinf(hi), p0 + 1, hi)), bounds=(lo, hi))
+        E, w = sol.x[:k], sol.x[k:2 * k]
+        gamma = float(sol.x[2 * k]) if damped else 0.0
     # noise level from the residual -> standard error of a single weight (~ sigma / sqrt(N_points))
-    r = ye - _design(E, te) @ w if len(E) else ye
+    r = ye - _design(E, te, gamma) @ w if len(E) else ye
     sigma = np.sqrt(np.mean(np.abs(r) ** 2) / 2)
     w_err = sigma / np.sqrt(len(te))
     peaks = [Peak(float(e), float(a), float(w_err)) for e, a in zip(E, w) if a > max(n_sigma * w_err, 1e-6)]

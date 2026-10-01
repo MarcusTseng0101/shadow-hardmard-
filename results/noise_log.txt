@@ -1,0 +1,31 @@
+== 1. Trotter error vs step (second order) and CX cost
+  delta=0.565  max|eps-E|=0.1869  CX at t_max=924
+  delta=0.283  max|eps-E|=0.0450  CX at t_max=1844
+  delta=0.188  max|eps-E|=0.0198  CX at t_max=2764
+  delta=0.141  max|eps-E|=0.0111  CX at t_max=3684
+  delta=0.094  max|eps-E|=0.0049  CX at t_max=5524
+  delta=0.071  max|eps-E|=0.0028  CX at t_max=7364
+  log-log slope 2.02 (second order -> 2)
+
+== 2/3. Noise sweep: Trotter delta=0.283, K=24, Z-basis system, 200000 shots, 5 reps; reference = Trotter quasi-energy spectrum
+  noiseless  raw               resolved 1.00  |dE| 0.0029  |dw| 0.0014  sum w 0.998  spurious 0.0
+  noiseless  REM               resolved 1.00  |dE| 0.0029  |dw| 0.0014  sum w 0.998  spurious 0.0
+  noiseless  REM + damped fit  resolved 1.00  |dE| 0.0029  |dw| 0.0014  sum w 0.998  spurious 0.0
+  p2=1e-4    raw               resolved 1.00  |dE| 0.0047  |dw| 0.0127  sum w 0.899  spurious 0.0
+  p2=1e-4    REM               resolved 1.00  |dE| 0.0048  |dw| 0.0106  sum w 0.915  spurious 0.0
+  p2=1e-4    REM + damped fit  resolved 1.00  |dE| 0.0047  |dw| 0.0021  sum w 1.001  spurious 0.0
+  p2=1e-3    raw               resolved 0.88  |dE| 0.0236  |dw| 0.0798  sum w 0.504  spurious 1.0
+  p2=1e-3    REM               resolved 0.88  |dE| 0.0236  |dw| 0.0776  sum w 0.524  spurious 1.0
+  p2=1e-3    REM + damped fit  resolved 1.00  |dE| 0.0137  |dw| 0.0044  sum w 1.006  spurious 0.0
+  p2=3e-3    raw               resolved 0.68  |dE| 0.0508  |dw| 0.1302  sum w 0.245  spurious 2.4
+  p2=3e-3    REM               resolved 0.68  |dE| 0.0426  |dw| 0.1285  sum w 0.240  spurious 1.8
+  p2=3e-3    REM + damped fit  resolved 0.93  |dE| 0.0476  |dw| 0.0078  sum w 1.008  spurious 0.4
+
+== 4. Fundamental quantities at t=1.0 under p2=1e-3 noise (uniform shadows, Trotter delta=0.25, 164 CX)
+  quantity   reference              raw              REM
+  Re g         -0.4169   -0.3400+-0.0030   -0.3463+-0.0030
+  Im g         -0.4956   -0.4224+-0.0029   -0.4305+-0.0029
+  <Mz>          0.8628    0.8024+-0.0064    0.8166+-0.0064
+  Re <Mz U>    -0.0567   -0.0288+-0.0094   -0.0286+-0.0094
+
+saved C:\Users\tseng\shadow-hadamard\results
