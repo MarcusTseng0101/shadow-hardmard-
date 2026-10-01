@@ -1,0 +1,445 @@
+{
+  "model": {
+    "J": 1.0,
+    "delta": 0.5,
+    "h": 0.3,
+    "periodic": false,
+    "K": 40,
+    "budget": 200000,
+    "budgets": [
+      50000,
+      200000
+    ],
+    "reps": 3,
+    "seed": 7,
+    "tag": "_h03"
+  },
+  "dt": 0.4792259980052227,
+  "exact_levels": [
+    {
+      "sector": 3,
+      "energy": 1.9000000000000001,
+      "weight": 0.19364225602923357
+    },
+    {
+      "sector": 1,
+      "energy": -3.072281323269015,
+      "weight": 0.2726378798630888
+    },
+    {
+      "sector": 1,
+      "energy": 0.3,
+      "weight": 0.02283073290026055
+    },
+    {
+      "sector": 1,
+      "energy": 2.672281323269014,
+      "weight": 0.2655334784334473
+    },
+    {
+      "sector": -1,
+      "energy": -3.672281323269015,
+      "weight": 0.0772631089658292
+    },
+    {
+      "sector": -1,
+      "energy": -0.3,
+      "weight": 0.05537637234257672
+    },
+    {
+      "sector": -1,
+      "energy": 2.072281323269014,
+      "weight": 0.09582201810435641
+    },
+    {
+      "sector": -3,
+      "energy": 0.09999999999999998,
+      "weight": 0.016894153361207292
+    }
+  ],
+  "showcase": {
+    "uniform shadows": {
+      "metrics": {
+        "resolved_fraction": 0.875,
+        "resolved_weight_fraction": 0.9771692670997393,
+        "mean_abs_energy_err": 0.0016111674465583603,
+        "mean_abs_weight_err": 0.0053962635840864165,
+        "n_spurious": 0,
+        "energy_from_spectrum_err": 0.017751156678402352,
+        "energy_from_shadow_err": 0.010678455084850741
+      },
+      "peaks": [
+        {
+          "energy": 1.9000478405039978,
+          "weight": 0.20158523313563104,
+          "weight_err": 0.002451784146409858,
+          "sector": 3
+        },
+        {
+          "energy": -3.0760989563577543,
+          "weight": 0.27645851470263516,
+          "weight_err": 0.00552912643055757,
+          "sector": 1
+        },
+        {
+          "energy": 2.6708072833933114,
+          "weight": 0.25225171755225473,
+          "weight_err": 0.00552912643055757,
+          "sector": 1
+        },
+        {
+          "energy": -3.6727011748397107,
+          "weight": 0.07713575104866138,
+          "weight_err": 0.0046635056346683215,
+          "sector": -1
+        },
+        {
+          "energy": -0.2994130726476693,
+          "weight": 0.05396225345270534,
+          "weight_err": 0.0046635056346683215,
+          "sector": -1
+        },
+        {
+          "energy": 2.075035838036896,
+          "weight": 0.10620491918102307,
+          "weight_err": 0.0046635056346683215,
+          "sector": -1
+        },
+        {
+          "energy": 0.10217736496656037,
+          "weight": 0.016090058983444663,
+          "weight_err": 0.0015157686784529698,
+          "sector": -3
+        }
+      ],
+      "ancilla_only_peaks": [
+        {
+          "energy": -3.680492518236807,
+          "weight": 0.07720166846343399,
+          "weight_err": 0.0022190749026389533,
+          "sector": null
+        },
+        {
+          "energy": -3.073333352041394,
+          "weight": 0.27395475413856657,
+          "weight_err": 0.0022190749026389533,
+          "sector": null
+        },
+        {
+          "energy": -0.2967703247080391,
+          "weight": 0.059488389391084806,
+          "weight_err": 0.0022190749026389533,
+          "sector": null
+        },
+        {
+          "energy": 0.2844280296418732,
+          "weight": 0.021054939555447006,
+          "weight_err": 0.0022190749026389533,
+          "sector": null
+        },
+        {
+          "energy": 1.9054830536123422,
+          "weight": 0.20138389083225278,
+          "weight_err": 0.0022190749026389533,
+          "sector": null
+        },
+        {
+          "energy": 2.0828970951295775,
+          "weight": 0.0857281644525086,
+          "weight_err": 0.0022190749026389533,
+          "sector": null
+        },
+        {
+          "energy": 2.6728477216358026,
+          "weight": 0.2598899408464664,
+          "weight_err": 0.0022190749026389533,
+          "sector": null
+        }
+      ]
+    },
+    "Z-biased shadows": {
+      "metrics": {
+        "resolved_fraction": 1.0,
+        "resolved_weight_fraction": 0.9999999999999999,
+        "mean_abs_energy_err": 0.004179326440993355,
+        "mean_abs_weight_err": 0.001081530879872705,
+        "n_spurious": 0,
+        "energy_from_spectrum_err": 0.0037674110583786613,
+        "energy_from_shadow_err": 0.0038490107538085294
+      },
+      "peaks": [
+        {
+          "energy": 1.9007187274115946,
+          "weight": 0.19428305551509625,
+          "weight_err": 0.0013249018371790367,
+          "sector": 3
+        },
+        {
+          "energy": -3.0714539968388914,
+          "weight": 0.2727276818582372,
+          "weight_err": 0.002067502905362912,
+          "sector": 1
+        },
+        {
+          "energy": 0.2809037788476271,
+          "weight": 0.022875179928300796,
+          "weight_err": 0.002067502905362912,
+          "sector": 1
+        },
+        {
+          "energy": 2.6737717359239657,
+          "weight": 0.2648337489999926,
+          "weight_err": 0.002067502905362912,
+          "sector": 1
+        },
+        {
+          "energy": -3.6686892426612627,
+          "weight": 0.07823402151989081,
+          "weight_err": 0.001460212065648388,
+          "sector": -1
+        },
+        {
+          "energy": -0.30306664354783147,
+          "weight": 0.05411490028114023,
+          "weight_err": 0.001460212065648388,
+          "sector": -1
+        },
+        {
+          "energy": 2.072690166830432,
+          "weight": 0.09935777091022971,
+          "weight_err": 0.001460212065648388,
+          "sector": -1
+        },
+        {
+          "energy": 0.09576564383809717,
+          "weight": 0.0183034850363115,
+          "weight_err": 0.00048266573631802154,
+          "sector": -3
+        }
+      ],
+      "ancilla_only_peaks": [
+        {
+          "energy": -3.6663543938023224,
+          "weight": 0.07593196388922517,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        },
+        {
+          "energy": -3.071471463647952,
+          "weight": 0.27304055496783297,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        },
+        {
+          "energy": -1.3293659016535677,
+          "weight": 0.008001006814581385,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        },
+        {
+          "energy": -0.3034069374911937,
+          "weight": 0.057542026542550605,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        },
+        {
+          "energy": 0.27325716085999663,
+          "weight": 0.022739422675260346,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        },
+        {
+          "energy": 1.8943179634530403,
+          "weight": 0.19719103851107217,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        },
+        {
+          "energy": 2.0619610941468856,
+          "weight": 0.1091045172979632,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        },
+        {
+          "energy": 2.6715789973290454,
+          "weight": 0.26492811179857256,
+          "weight_err": 0.0021503825238479673,
+          "sector": null
+        }
+      ]
+    },
+    "Z-basis only": {
+      "metrics": {
+        "resolved_fraction": 1.0,
+        "resolved_weight_fraction": 0.9999999999999999,
+        "mean_abs_energy_err": 0.0018569608700151688,
+        "mean_abs_weight_err": 0.0009491020643011506,
+        "n_spurious": 0,
+        "energy_from_spectrum_err": 0.00604195381451339,
+        "energy_from_shadow_err": NaN
+      },
+      "peaks": [
+        {
+          "energy": 1.9001013134372973,
+          "weight": 0.19355610128424963,
+          "weight_err": 0.0009240374896928064,
+          "sector": 3
+        },
+        {
+          "energy": -3.0724530746941308,
+          "weight": 0.2739617852977399,
+          "weight_err": 0.0013420811451168404,
+          "sector": 1
+        },
+        {
+          "energy": 0.30887928539127485,
+          "weight": 0.024734088804251302,
+          "weight_err": 0.0013420811451168404,
+          "sector": 1
+        },
+        {
+          "energy": 2.6738624722152067,
+          "weight": 0.26846396126714256,
+          "weight_err": 0.0013420811451168404,
+          "sector": 1
+        },
+        {
+          "energy": -3.6726145732911903,
+          "weight": 0.07696697455503754,
+          "weight_err": 0.0009816242239812827,
+          "sector": -1
+        },
+        {
+          "energy": -0.30111480929838913,
+          "weight": 0.05452704617643929,
+          "weight_err": 0.0009816242239812827,
+          "sector": -1
+        },
+        {
+          "energy": 2.074023841460985,
+          "weight": 0.09575487254394711,
+          "weight_err": 0.0009816242239812827,
+          "sector": -1
+        },
+        {
+          "energy": 0.09906838975229426,
+          "weight": 0.016757841901457512,
+          "weight_err": 0.0002916456862492292,
+          "sector": -3
+        }
+      ],
+      "ancilla_only_peaks": [
+        {
+          "energy": -3.673698551296553,
+          "weight": 0.07718309046958591,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        },
+        {
+          "energy": -3.073177856113917,
+          "weight": 0.2750267919041391,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        },
+        {
+          "energy": -0.30836135314481716,
+          "weight": 0.05661723143132947,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        },
+        {
+          "energy": 0.28161038015038364,
+          "weight": 0.02085234326824086,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        },
+        {
+          "energy": 1.8993999448092003,
+          "weight": 0.19621025599336045,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        },
+        {
+          "energy": 2.076988599086449,
+          "weight": 0.09583916077631331,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        },
+        {
+          "energy": 2.673292741770895,
+          "weight": 0.27057217951361007,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        },
+        {
+          "energy": 5.49030434964096,
+          "weight": 0.00785412070609055,
+          "weight_err": 0.0020881226854607086,
+          "sector": null
+        }
+      ]
+    }
+  },
+  "sweep": {
+    "uniform shadows": {
+      "50000": {
+        "resolved_fraction": 0.7916666666666666,
+        "resolved_weight_fraction": 0.9659064981922678,
+        "mean_abs_energy_err": 0.011416107731069254,
+        "mean_abs_weight_err": 0.012884532315472109,
+        "n_spurious": 1.0,
+        "energy_from_spectrum_err": 0.20499579152644357,
+        "energy_from_shadow_err": 0.026363779073370324
+      },
+      "200000": {
+        "resolved_fraction": 1.0,
+        "resolved_weight_fraction": 0.9999999999999999,
+        "mean_abs_energy_err": 0.0077312004169369395,
+        "mean_abs_weight_err": 0.0041810146645005096,
+        "n_spurious": 0.0,
+        "energy_from_spectrum_err": 0.03693231081576625,
+        "energy_from_shadow_err": 0.008042535803656789
+      }
+    },
+    "Z-biased shadows": {
+      "50000": {
+        "resolved_fraction": 1.0,
+        "resolved_weight_fraction": 0.9999999999999999,
+        "mean_abs_energy_err": 0.00660219294460111,
+        "mean_abs_weight_err": 0.003841654986669406,
+        "n_spurious": 0.0,
+        "energy_from_spectrum_err": 0.03139037641207167,
+        "energy_from_shadow_err": 0.06138602868899209
+      },
+      "200000": {
+        "resolved_fraction": 1.0,
+        "resolved_weight_fraction": 0.9999999999999999,
+        "mean_abs_energy_err": 0.0034602240285475246,
+        "mean_abs_weight_err": 0.0017794403224439057,
+        "n_spurious": 0.0,
+        "energy_from_spectrum_err": 0.01842491357378026,
+        "energy_from_shadow_err": 0.02498768109943462
+      }
+    },
+    "Z-basis only": {
+      "50000": {
+        "resolved_fraction": 1.0,
+        "resolved_weight_fraction": 0.9999999999999999,
+        "mean_abs_energy_err": 0.0031436201915367155,
+        "mean_abs_weight_err": 0.002821561551867731,
+        "n_spurious": 0.0,
+        "energy_from_spectrum_err": 0.013135072997322953,
+        "energy_from_shadow_err": NaN
+      },
+      "200000": {
+        "resolved_fraction": 1.0,
+        "resolved_weight_fraction": 0.9999999999999999,
+        "mean_abs_energy_err": 0.0023037862211282268,
+        "mean_abs_weight_err": 0.0012335878497840372,
+        "n_spurious": 0.0,
+        "energy_from_spectrum_err": 0.005295801127186038,
+        "energy_from_shadow_err": NaN
+      }
+    }
+  }
+}

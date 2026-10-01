@@ -102,6 +102,7 @@ def main():
     ap.add_argument("--budgets", type=int, nargs="*", default=[50_000, 200_000, 1_000_000])
     ap.add_argument("--reps", type=int, default=6)
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--tag", default="", help="suffix for output files, e.g. _h03")
     args = ap.parse_args()
     OUT.mkdir(exist_ok=True)
 
@@ -135,7 +136,7 @@ def main():
         print("  ancilla-only peaks (no labels):", [(round(p.energy, 3), round(p.weight, 3)) for p in base])
         print("  metrics:", {k: round(v, 4) for k, v in met.items()})
         slug = name.split()[0].lower().replace("-", "")
-        plot_showcase(prob, exact, rows, peaks, base, name, args.budget, OUT / f"advanced_spectrum_{slug}.png")
+        plot_showcase(prob, exact, rows, peaks, base, name, args.budget, OUT / f"advanced_spectrum_{slug}{args.tag}.png")
         report["showcase"][name] = {
             "metrics": met,
             "peaks": [vars(p) for p in peaks],
@@ -173,8 +174,8 @@ def main():
     axs[0].legend(fontsize=8, frameon=False)
     fig.suptitle(f"Measurement strategy comparison (mean of {args.reps} runs, K={args.K} times)", fontsize=10)
     fig.tight_layout()
-    fig.savefig(OUT / "advanced_strategies.png", dpi=160)
-    json.dump(report, open(OUT / "advanced.json", "w"), indent=2, default=float)
+    fig.savefig(OUT / f"advanced_strategies{args.tag}.png", dpi=160)
+    json.dump(report, open(OUT / f"advanced{args.tag}.json", "w"), indent=2, default=float)
     print("saved results to", OUT)
 
 

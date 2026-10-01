@@ -1,0 +1,56 @@
+XXZ: J=1.0 delta=0.5 h=0.3 periodic=False;  dt=0.479, K=40, T_max=18.7
+exact populated levels:
+  S^z=+1.5  E=+1.9000  w=0.1936
+  S^z=+0.5  E=-3.0723  w=0.2726
+  S^z=+0.5  E=+0.3000  w=0.0228
+  S^z=+0.5  E=+2.6723  w=0.2655
+  S^z=-0.5  E=-3.6723  w=0.0773
+  S^z=-0.5  E=-0.3000  w=0.0554
+  S^z=-0.5  E=+2.0723  w=0.0958
+  S^z=-1.5  E=+0.1000  w=0.0169
+
+== uniform shadows: Pauli shadows (pX=0.33, pY=0.33, pZ=0.33)  budget 200000
+    S^z  E exact  w exact |    E est            w est
+   +1.5  +1.9000   0.1936 |  +1.9000   0.2016 +- 0.0025
+   +0.5  -3.0723   0.2726 |  -3.0761   0.2765 +- 0.0055
+   +0.5  +0.3000   0.0228 | (not resolved)
+   +0.5  +2.6723   0.2655 |  +2.6708   0.2523 +- 0.0055
+   -0.5  -3.6723   0.0773 |  -3.6727   0.0771 +- 0.0047
+   -0.5  -0.3000   0.0554 |  -0.2994   0.0540 +- 0.0047
+   -0.5  +2.0723   0.0958 |  +2.0750   0.1062 +- 0.0047
+   -1.5  +0.1000   0.0169 |  +0.1022   0.0161 +- 0.0015
+  ancilla-only peaks (no labels): [(-3.68, 0.077), (-3.073, 0.274), (-0.297, 0.059), (0.284, 0.021), (1.905, 0.201), (2.083, 0.086), (2.673, 0.26)]
+  metrics: {'resolved_fraction': 0.875, 'resolved_weight_fraction': 0.9772, 'mean_abs_energy_err': 0.0016, 'mean_abs_weight_err': 0.0054, 'n_spurious': 0, 'energy_from_spectrum_err': 0.0178, 'energy_from_shadow_err': 0.0107}
+
+== Z-biased shadows: Pauli shadows (pX=0.15, pY=0.15, pZ=0.70)  budget 200000
+    S^z  E exact  w exact |    E est            w est
+   +1.5  +1.9000   0.1936 |  +1.9007   0.1943 +- 0.0013
+   +0.5  -3.0723   0.2726 |  -3.0715   0.2727 +- 0.0021
+   +0.5  +0.3000   0.0228 |  +0.2809   0.0229 +- 0.0021
+   +0.5  +2.6723   0.2655 |  +2.6738   0.2648 +- 0.0021
+   -0.5  -3.6723   0.0773 |  -3.6687   0.0782 +- 0.0015
+   -0.5  -0.3000   0.0554 |  -0.3031   0.0541 +- 0.0015
+   -0.5  +2.0723   0.0958 |  +2.0727   0.0994 +- 0.0015
+   -1.5  +0.1000   0.0169 |  +0.0958   0.0183 +- 0.0005
+  ancilla-only peaks (no labels): [(-3.666, 0.076), (-3.071, 0.273), (-1.329, 0.008), (-0.303, 0.058), (0.273, 0.023), (1.894, 0.197), (2.062, 0.109), (2.672, 0.265)]
+  metrics: {'resolved_fraction': 1.0, 'resolved_weight_fraction': 1.0, 'mean_abs_energy_err': 0.0042, 'mean_abs_weight_err': 0.0011, 'n_spurious': 0, 'energy_from_spectrum_err': 0.0038, 'energy_from_shadow_err': 0.0038}
+
+== Z-basis only: Pauli shadows (pX=0.00, pY=0.00, pZ=1.00)  budget 200000
+    S^z  E exact  w exact |    E est            w est
+   +1.5  +1.9000   0.1936 |  +1.9001   0.1936 +- 0.0009
+   +0.5  -3.0723   0.2726 |  -3.0725   0.2740 +- 0.0013
+   +0.5  +0.3000   0.0228 |  +0.3089   0.0247 +- 0.0013
+   +0.5  +2.6723   0.2655 |  +2.6739   0.2685 +- 0.0013
+   -0.5  -3.6723   0.0773 |  -3.6726   0.0770 +- 0.0010
+   -0.5  -0.3000   0.0554 |  -0.3011   0.0545 +- 0.0010
+   -0.5  +2.0723   0.0958 |  +2.0740   0.0958 +- 0.0010
+   -1.5  +0.1000   0.0169 |  +0.0991   0.0168 +- 0.0003
+  ancilla-only peaks (no labels): [(-3.674, 0.077), (-3.073, 0.275), (-0.308, 0.057), (0.282, 0.021), (1.899, 0.196), (2.077, 0.096), (2.673, 0.271), (5.49, 0.008)]
+  metrics: {'resolved_fraction': 1.0, 'resolved_weight_fraction': 1.0, 'mean_abs_energy_err': 0.0019, 'mean_abs_weight_err': 0.0009, 'n_spurious': 0, 'energy_from_spectrum_err': 0.006, 'energy_from_shadow_err': nan}
+sweep uniform shadows   B=   50000: resolved_fraction=0.7917  mean_abs_energy_err=0.0114  mean_abs_weight_err=0.0129  n_spurious=1.0000
+sweep uniform shadows   B=  200000: resolved_fraction=1.0000  mean_abs_energy_err=0.0077  mean_abs_weight_err=0.0042  n_spurious=0.0000
+sweep Z-biased shadows  B=   50000: resolved_fraction=1.0000  mean_abs_energy_err=0.0066  mean_abs_weight_err=0.0038  n_spurious=0.0000
+sweep Z-biased shadows  B=  200000: resolved_fraction=1.0000  mean_abs_energy_err=0.0035  mean_abs_weight_err=0.0018  n_spurious=0.0000
+sweep Z-basis only      B=   50000: resolved_fraction=1.0000  mean_abs_energy_err=0.0031  mean_abs_weight_err=0.0028  n_spurious=0.0000
+sweep Z-basis only      B=  200000: resolved_fraction=1.0000  mean_abs_energy_err=0.0023  mean_abs_weight_err=0.0012  n_spurious=0.0000
+saved results to C:\Users\tseng\shadow-hadamard\results
